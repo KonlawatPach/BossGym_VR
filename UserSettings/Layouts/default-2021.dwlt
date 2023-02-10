@@ -71,10 +71,10 @@ MonoBehaviour:
     y: 0
     width: 824
     height: 730.8
-  m_MinSize: {x: 201, y: 442}
-  m_MaxSize: {x: 4001, y: 8042}
+  m_MinSize: {x: 100, y: 200}
+  m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 312
+  controlID: 52
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -124,7 +124,7 @@ MonoBehaviour:
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
-  m_LastLoadedLayoutName: My Layout
+  m_LastLoadedLayoutName: 
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,10 +147,10 @@ MonoBehaviour:
     y: 30
     width: 1536
     height: 730.8
-  m_MinSize: {x: 709, y: 492}
-  m_MaxSize: {x: 18004, y: 14042}
+  m_MinSize: {x: 432, y: 492}
+  m_MaxSize: {x: 26194, y: 16192}
   vertical: 0
-  controlID: 258
+  controlID: 75
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 288
+  controlID: 19
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -398,7 +398,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 2a3e0000
     m_LastClickedID: 15914
-    m_ExpandedIDs: 00000000c26f000000ca9a3b
+    m_ExpandedIDs: 00000000c89c0000ca9c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -426,21 +426,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000c26f0000c66f000000ca9a3b
+    m_ExpandedIDs: ffffffff00000000c89c0000ca9c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Main menu
-      m_OriginalName: Main menu
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 28906
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 12}
     m_SearchString: 
@@ -946,9 +946,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: f4dbffff
+      m_SelectedIDs: 34daffff
       m_LastClickedID: 0
-      m_ExpandedIDs: 86e2fffffce2ffff84e9ffff
+      m_ExpandedIDs: 42d5ffff76d6ffff7ad6ffff5adfffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
