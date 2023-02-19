@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class LoadScene : MonoBehaviour
 {
+    public string UsersceneName = "";
     public void LoadSceneUsingName(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName);        
     }
 
     public void ReloadCurrentScene()
