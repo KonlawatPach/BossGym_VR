@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.UI;
 using UnityEngine.XR;
+using TMPro;
 
 public class EnemyScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Text BossHPText;
+    public TextMeshProUGUI BossHPText;
     public XRState xrstatus;
     public int BossHP = 100;
 
