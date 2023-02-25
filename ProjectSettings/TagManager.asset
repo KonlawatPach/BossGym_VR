@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LeftHand
   - RightHand
+  - Fist
   layers:
   - Default
   - TransparentFX
