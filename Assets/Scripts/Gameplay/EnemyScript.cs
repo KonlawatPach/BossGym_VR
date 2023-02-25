@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR;
 using TMPro;
 
 public class EnemyScript : MonoBehaviour
