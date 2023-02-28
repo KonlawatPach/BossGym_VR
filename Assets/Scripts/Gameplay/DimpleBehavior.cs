@@ -27,6 +27,10 @@ public class DimpleBehavior : MonoBehaviour
     public GameObject DodgeLeft;
     public GameObject DodgeRight;
 
+    private VibrateController FistLeftVibrate;
+    private VibrateController FistRightVibrate;
+
+
 
     public string attackState = "idle";         //idle, runtoplayer, showalert, attack, restattack, runbackward
     public string hookType;
@@ -39,6 +43,10 @@ public class DimpleBehavior : MonoBehaviour
     public float delayTime = 0;
     void Awake()
     {
+        FistLeftVibrate = GameObject.Find("LeftHand Controller").GetComponent<VibrateController>();
+        FistRightVibrate = GameObject.Find("RightHand Controller").GetComponent<VibrateController>();
+
+
         xrstatus = GameObject.Find("XR Rig").GetComponent<XRState>();
         playerHP = GameObject.Find("Main Camera").GetComponent<PlayerHP>();
         dimpleAudio = GetComponent<AudioSource>();
@@ -191,6 +199,7 @@ public class DimpleBehavior : MonoBehaviour
             if (xrstatus.isLeftGripActive && leftController.transform.position.z > cameraXR.transform.position.z && leftController.transform.position.y > cameraXR.transform.position.y-0.02)
             {
                 dimpleAudio.PlayOneShot(blockSFX);
+                FistLeftVibrate.VibrateWeak(0.25f);
             } 
             else
             {
@@ -203,6 +212,7 @@ public class DimpleBehavior : MonoBehaviour
             if (xrstatus.isRightGripActive && rightController.transform.position.z > cameraXR.transform.position.z && rightController.transform.position.y > cameraXR.transform.position.y - 0.02)
             {
                 dimpleAudio.PlayOneShot(blockSFX);
+                FistRightVibrate.VibrateWeak(0.25f);
             }
             else
             {
