@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.UI;
 
 public class DimpleBehavior : MonoBehaviour
@@ -27,10 +28,6 @@ public class DimpleBehavior : MonoBehaviour
     public GameObject DodgeLeft;
     public GameObject DodgeRight;
 
-    private VibrateController FistLeftVibrate;
-    private VibrateController FistRightVibrate;
-
-
 
     public string attackState = "idle";         //idle, runtoplayer, showalert, attack, restattack, runbackward
     public string hookType;
@@ -43,10 +40,6 @@ public class DimpleBehavior : MonoBehaviour
     public float delayTime = 0;
     void Awake()
     {
-        FistLeftVibrate = GameObject.Find("LeftHand Controller").GetComponent<VibrateController>();
-        FistRightVibrate = GameObject.Find("RightHand Controller").GetComponent<VibrateController>();
-
-
         xrstatus = GameObject.Find("XR Rig").GetComponent<XRState>();
         playerHP = GameObject.Find("Main Camera").GetComponent<PlayerHP>();
         dimpleAudio = GetComponent<AudioSource>();
@@ -55,6 +48,7 @@ public class DimpleBehavior : MonoBehaviour
     }
 
     // Update is called once per frame
+    [System.Obsolete]
     void Update()
     {
         if (isDelay)
@@ -86,7 +80,7 @@ public class DimpleBehavior : MonoBehaviour
 
         else if (attackState == "showalert")
         {
-            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, -2.45f);
+            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, -2.90f);
             if (attackLoop > 0)
             {
                 if (Random.Range(0, 2) == 0) hookType = "FL";
@@ -94,7 +88,7 @@ public class DimpleBehavior : MonoBehaviour
 
                 showAlert(hookType);
                 attackState = "attack";
-                startDelay(0.5f);
+                startDelay(0.2f);
             }
         }
 
@@ -113,7 +107,10 @@ public class DimpleBehavior : MonoBehaviour
             dimpleAnimate.SetBool("hookLeft", false);
             dimpleAnimate.SetBool("hookRight", false);
             hideAlert(hookType);
-            checkDamage(hookType);
+            if (!dimpleAnimate.GetBool("isTired"))
+            {
+                checkDamage(hookType);
+            }
 
             if (attackLoop > 0)
             {
@@ -192,15 +189,17 @@ public class DimpleBehavior : MonoBehaviour
         }
     }
 
+    [System.Obsolete]
     void checkDamage(string hooktype)
     {
-        if(hooktype == "FL")
+        if (hooktype == "FL")
         {
-            if (xrstatus.isLeftGripActive && leftController.transform.position.z > cameraXR.transform.position.z && leftController.transform.position.y > cameraXR.transform.position.y-0.02)
+            if (xrstatus.isLeftGripActive && leftController.transform.position.z > cameraXR.transform.position.z && 
+                leftController.transform.position.y > cameraXR.transform.position.y - 0.02)
             {
                 dimpleAudio.PlayOneShot(blockSFX);
-                FistLeftVibrate.VibrateWeak(0.25f);
-            } 
+                ActivateLeftHaptic();
+            }
             else
             {
                 dimpleAudio.PlayOneShot(hurtSFX);
@@ -209,16 +208,63 @@ public class DimpleBehavior : MonoBehaviour
         }
         else
         {
-            if (xrstatus.isRightGripActive && rightController.transform.position.z > cameraXR.transform.position.z && rightController.transform.position.y > cameraXR.transform.position.y - 0.02)
+            if (xrstatus.isRightGripActive && rightController.transform.position.z > cameraXR.transform.position.z &&
+                rightController.transform.position.y > cameraXR.transform.position.y - 0.02)
             {
                 dimpleAudio.PlayOneShot(blockSFX);
-                FistRightVibrate.VibrateWeak(0.25f);
+                ActivateRightHaptic();
             }
             else
             {
                 dimpleAudio.PlayOneShot(hurtSFX);
                 playerHP.getDamage();
-            }   
+            }
+        }
+    }
+
+    [System.Obsolete]
+    void ActivateLeftHaptic()
+    {
+        List<UnityEngine.XR.InputDevice> devices = new List<UnityEngine.XR.InputDevice>();
+
+        UnityEngine.XR.InputDevices.GetDevicesWithRole(UnityEngine.XR.InputDeviceRole.LeftHanded, devices);
+
+        foreach (var device in devices)
+        {
+            UnityEngine.XR.HapticCapabilities capabilities;
+            if (device.TryGetHapticCapabilities(out capabilities))
+            {
+                if (capabilities.supportsImpulse)
+                {
+                    uint channel = 0;
+                    float amplitude = 0.5f;
+                    float duration = 0.25f;
+                    device.SendHapticImpulse(channel, amplitude, duration);
+                }
+            }
+        }
+    }
+
+    [System.Obsolete]
+    void ActivateRightHaptic()
+    {
+        List<UnityEngine.XR.InputDevice> devices = new List<UnityEngine.XR.InputDevice>();
+
+        UnityEngine.XR.InputDevices.GetDevicesWithRole(UnityEngine.XR.InputDeviceRole.RightHanded, devices);
+
+        foreach (var device in devices)
+        {
+            UnityEngine.XR.HapticCapabilities capabilities;
+            if (device.TryGetHapticCapabilities(out capabilities))
+            {
+                if (capabilities.supportsImpulse)
+                {
+                    uint channel = 0;
+                    float amplitude = 0.5f;
+                    float duration = 0.25f;
+                    device.SendHapticImpulse(channel, amplitude, duration);
+                }
+            }
         }
     }
 

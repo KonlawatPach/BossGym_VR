@@ -9,6 +9,7 @@ public class PlayerHP : MonoBehaviour
     public TextMeshProUGUI playerHP;
     public GameObject hurt1;
     public GameObject hurt2;
+    public GameObject hurt3;
 
     public int hp = 3;
     void Start()
@@ -28,6 +29,11 @@ public class PlayerHP : MonoBehaviour
             hurt1.SetActive(false);
             hurt2.SetActive(true);
         }
+        else if(hp < 1)
+        {
+            hurt3.SetActive(true);
+            hurt2.SetActive(false);
+        }
     }
 
     public void getDamage()
@@ -38,9 +44,9 @@ public class PlayerHP : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Fist"))
-        {
-            getDamage();
-        }
+        //if (other.CompareTag("Fist"))
+        //{
+        //    getDamage();
+        //}
     }
 }
