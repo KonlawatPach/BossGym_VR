@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerHP : MonoBehaviour
 {
@@ -31,8 +32,7 @@ public class PlayerHP : MonoBehaviour
         }
         else if(hp < 1)
         {
-            hurt3.SetActive(true);
-            hurt2.SetActive(false);
+            SceneManager.LoadScene("GameOver");
         }
     }
 
