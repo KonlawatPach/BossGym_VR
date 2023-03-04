@@ -4,6 +4,8 @@ using TMPro;
 
 public class EnemyScript : MonoBehaviour
 {
+    private Animator enemyAnimate;
+
     // Start is called before the first frame update
     public TextMeshProUGUI bossName;
     public Image healthBar;
@@ -21,12 +23,16 @@ public class EnemyScript : MonoBehaviour
         bossName.text = bossname;
         playerAudio = GetComponent<AudioSource>();
         xrstatus = GameObject.Find("XR Rig").GetComponent<XRState>();
+        enemyAnimate = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (BossHP <= 0)
+        {
+            enemyAnimate.SetBool("isDying", true);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

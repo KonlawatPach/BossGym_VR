@@ -12,8 +12,6 @@ public class DimpleBehavior : MonoBehaviour
     public GameObject cameraXR;
     public GameObject leftController;
     public GameObject rightController;
-    
-
 
     //animator & sound
     private Animator dimpleAnimate;
@@ -51,93 +49,97 @@ public class DimpleBehavior : MonoBehaviour
     [System.Obsolete]
     void Update()
     {
-        if (isDelay)
+        if(!dimpleAnimate.GetBool("isDying"))
         {
-            if (Time.time - startTime > delayTime)
+            if (isDelay)
             {
-                isDelay = false;
-            }
-
-        }
-
-        else if (attackState == "idle")
-        {
-            attackState = "runtoplayer";
-            dimpleAnimate.SetFloat("speed", 0.5f);
-        }
-
-        else if (attackState == "runtoplayer" && gameObject.transform.position.z > -2.80f && gameObject.transform.position.z <= -1.40f)
-        {
-            dimpleAnimate.SetFloat("speed", 0f);
-
-            attackState = "showalert";
-            attackType = Random.Range(1, 4);
-            if (attackType == 1 || attackType == 2) attackLoop = 2;
-            if (attackType == 3) attackLoop = 6;
-
-            startDelay(1f);
-        }
-
-        else if (attackState == "showalert")
-        {
-            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, -2.90f);
-            if (attackLoop > 0)
-            {
-                if (Random.Range(0, 2) == 0) hookType = "FL";
-                else hookType = "FR";
-
-                showAlert(hookType);
-                attackState = "attack";
-                startDelay(0.2f);
-            }
-        }
-
-        else if (attackState == "attack")
-        {
-            if (hookType == "FR") dimpleAnimate.SetBool("hookLeft", true);
-            else dimpleAnimate.SetBool("hookRight", true);
-
-            attackLoop -= 1;
-            attackState = "restattack";
-            startDelay(0.67f);
-        }
-
-        else if (attackState == "restattack")
-        {
-            dimpleAnimate.SetBool("hookLeft", false);
-            dimpleAnimate.SetBool("hookRight", false);
-            hideAlert(hookType);
-            if (!dimpleAnimate.GetBool("isTired"))
-            {
-                checkDamage(hookType);
-            }
-
-            if (attackLoop > 0)
-            {
-                attackState = "showalert";
-            }
-            else
-            {
-                if (attackType == 3 && !dimpleAnimate.GetBool("isTired"))
+                if (Time.time - startTime > delayTime)
                 {
-                    dimpleAnimate.SetBool("isTired", true);
-                    startDelay(3f);
+                    isDelay = false;
+                }
+
+            }
+
+            else if (attackState == "idle")
+            {
+                attackState = "runtoplayer";
+                dimpleAnimate.SetFloat("speed", 0.5f);
+            }
+
+            else if (attackState == "runtoplayer" && gameObject.transform.position.x > -213f)
+            {
+                dimpleAnimate.SetFloat("speed", 0f);
+
+                attackState = "showalert";
+                attackType = Random.Range(1, 4);
+                if (attackType == 1 || attackType == 2) attackLoop = 2;
+                if (attackType == 3) attackLoop = 6;
+
+                startDelay(1f);
+            }
+
+            else if (attackState == "showalert")
+            {
+                gameObject.transform.position = new Vector3(-212.85f, transform.position.y, transform.position.z);
+                if (attackLoop > 0)
+                {
+                    if (Random.Range(0, 2) == 0) hookType = "FL";
+                    else hookType = "FR";
+
+                    showAlert(hookType);
+                    attackState = "attack";
+                    startDelay(0.2f);
+                }
+            }
+
+            else if (attackState == "attack")
+            {
+                if (hookType == "FR") dimpleAnimate.SetBool("hookLeft", true);
+                else dimpleAnimate.SetBool("hookRight", true);
+
+                attackLoop -= 1;
+                attackState = "restattack";
+                startDelay(0.67f);
+            }
+
+            else if (attackState == "restattack")
+            {
+                dimpleAnimate.SetBool("hookLeft", false);
+                dimpleAnimate.SetBool("hookRight", false);
+                hideAlert(hookType);
+                if (!dimpleAnimate.GetBool("isTired"))
+                {
+                    checkDamage(hookType);
+                }
+
+                if (attackLoop > 0)
+                {
+                    attackState = "showalert";
                 }
                 else
                 {
-                    dimpleAnimate.SetBool("isTired", false);
-                    attackState = "runbackward";
-                    dimpleAnimate.SetFloat("speed", -0.5f);
+                    if (attackType == 3 && !dimpleAnimate.GetBool("isTired"))
+                    {
+                        dimpleAnimate.SetBool("isTired", true);
+                        startDelay(3f);
+                    }
+                    else
+                    {
+                        dimpleAnimate.SetBool("isTired", false);
+                        attackState = "runbackward";
+                        dimpleAnimate.SetFloat("speed", -0.5f);
+                    }
                 }
             }
-        }
 
-        else if (attackState == "runbackward" && gameObject.transform.position.z >= 3.33f)
-        {
-            dimpleAnimate.SetFloat("speed", 0f);
-            attackState = "idle";
-            startDelay(3f);
+            else if (attackState == "runbackward" && gameObject.transform.position.x < -219.64f)
+            {
+                dimpleAnimate.SetFloat("speed", 0f);
+                attackState = "idle";
+                startDelay(3f);
+            }
         }
+        
     }
 
     void startDelay(float delayT)
