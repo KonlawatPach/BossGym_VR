@@ -23,6 +23,8 @@ public class TrainerScripts : MonoBehaviour
     //item and another
     public XRState xrstatus;
     public SoundwithUser soundwithUser;
+    public DimpleIntro dimpleIntro;
+
     public GameObject grove;
     private bool showGrove = false;
     private bool getGrove = false;
@@ -75,6 +77,7 @@ public class TrainerScripts : MonoBehaviour
         trainerAnimate = GetComponent<Animator>();
         xrstatus = GameObject.Find("XR Rig").GetComponent<XRState>();
         soundwithUser = GameObject.Find("XR Rig").GetComponent<SoundwithUser>();
+        dimpleIntro = GameObject.Find("Dimples").GetComponent<DimpleIntro>();
 
         trainerAudio.clip = trainerClip[0];
         trainerAudio.Play();
@@ -188,11 +191,17 @@ public class TrainerScripts : MonoBehaviour
             trainerAudio.volume = 0f;
             nextClip();
             soundwithUser.playtrainer7();
+            Invoke("runningSonRam", 8f);
         }
         else
         {
             
         }
+    }
+
+    void runningSonRam()
+    {
+        dimpleIntro.startDimpleAnimation();
     }
 
     void nextClip()
