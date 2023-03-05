@@ -66,7 +66,7 @@ public class DimpleBehavior : MonoBehaviour
                 dimpleAnimate.SetFloat("speed", 0.5f);
             }
 
-            else if (attackState == "runtoplayer" && gameObject.transform.position.x > -213f)
+            else if (attackState == "runtoplayer" && gameObject.transform.position.x > -214f)
             {
                 dimpleAnimate.SetFloat("speed", 0f);
 

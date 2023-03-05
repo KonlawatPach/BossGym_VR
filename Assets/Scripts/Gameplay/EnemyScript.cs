@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -32,6 +35,7 @@ public class EnemyScript : MonoBehaviour
         if (BossHP <= 0)
         {
             enemyAnimate.SetBool("isDying", true);
+            Invoke("changeSceneFade", 5f);
         }
     }
 
@@ -50,5 +54,39 @@ public class EnemyScript : MonoBehaviour
 
         bossName.text = bossname;
         healthBar.fillAmount = BossHP / maxBossHP;
+    }
+
+    void changeSceneFade()
+    {
+        StartFade(true);
+        Invoke("changeScene", 3f);
+    }
+
+    public Image fadeImage;
+    public float fadeDuration = 1f;
+
+    public void StartFade(bool fadeIn)
+    {
+        StartCoroutine(FadeCanvas(fadeIn));
+    }
+
+    private IEnumerator FadeCanvas(bool fadeIn)
+    {
+        Color startColor = fadeImage.color;
+        Color endColor = new Color(startColor.r, startColor.g, startColor.b, fadeIn ? 1f : 0f);
+        float currentTime = 0f;
+
+        while (currentTime < fadeDuration)
+        {
+            float alpha = Mathf.Lerp(startColor.a, endColor.a, currentTime / fadeDuration);
+            fadeImage.color = new Color(endColor.r, endColor.g, endColor.b, alpha);
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    void changeScene()
+    {
+        SceneManager.LoadScene("Story 3");
     }
 }
