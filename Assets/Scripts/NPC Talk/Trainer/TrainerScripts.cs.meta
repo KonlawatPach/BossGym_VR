@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 236a9d90267fcc4448e3513e9b6f9e9f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - trainer1: {fileID: 8300000, guid: ce500d35f8c15a24eb7304b70d9193f8, type: 3}
+  - trainer2: {fileID: 8300000, guid: f3b80dd82fbdb474c8fdcfa5dcc10368, type: 3}
+  - trainer3: {instanceID: 0}
+  - trainer4: {instanceID: 0}
+  - trainer5: {instanceID: 0}
+  - trainer6: {instanceID: 0}
+  - trainer6_fail: {instanceID: 0}
+  - trainer7: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
