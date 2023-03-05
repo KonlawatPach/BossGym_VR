@@ -191,7 +191,7 @@ public class TrainerScripts : MonoBehaviour
             trainerAudio.volume = 0f;
             nextClip();
             soundwithUser.playtrainer7();
-            Invoke("runningSonRam", 8f);
+            Invoke("runningSonRam", 7f);
         }
         else
         {
@@ -355,5 +355,11 @@ public class TrainerScripts : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void died()
+    {
+        trainerAnimate.SetInteger("state", 7);
+        gameObject.transform.Rotate(0f, 180f, 0f);       
     }
 }

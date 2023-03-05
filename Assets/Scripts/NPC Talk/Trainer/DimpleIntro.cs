@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.SceneManagement;
 
 public class DimpleIntro : MonoBehaviour
 {
     private Animator dimpleAnimate;
+    private TrainerScripts trainer;
     private bool startAnim = false;
     private bool ispunch = false;
     private bool isrotate = false;
+    private bool isrunback = false;
 
     void Start()
     {
         dimpleAnimate = GetComponent<Animator>();
+        trainer = GameObject.Find("Trainer").GetComponent<TrainerScripts>();
     }
 
     // Update is called once per frame
@@ -41,6 +45,14 @@ public class DimpleIntro : MonoBehaviour
                         Invoke("Punch", 0.5f);
                     }
                 }
+                if (isrunback)
+                {
+                    if (gameObject.transform.position.x < -219.64f)
+                    {
+                        dimpleAnimate.SetFloat("speed", 0f);
+                        SceneManager.LoadScene("Stage 1");
+                    }
+                }
             }
         }
     }
@@ -56,17 +68,16 @@ public class DimpleIntro : MonoBehaviour
         {
             dimpleAnimate.SetBool("hookLeft", true);
             ispunch = true;
-            Invoke("RunBack", 1.5f);
+            Invoke("RunBack", 0.5f);
         }
     }
 
     private void RunBack()
     {
         dimpleAnimate.SetBool("hookLeft", false);
+        trainer.died();
+        gameObject.transform.Rotate(0f, -10f, 0f);
         dimpleAnimate.SetFloat("speed", -0.5f);
-        if (gameObject.transform.position.x > -226.64f)
-        {
-            dimpleAnimate.SetFloat("speed", 0f);
-        }
+        isrunback = true;
     }
 }
