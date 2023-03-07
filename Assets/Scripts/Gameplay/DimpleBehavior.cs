@@ -196,8 +196,8 @@ public class DimpleBehavior : MonoBehaviour
     {
         if (hooktype == "FL")
         {
-            if (xrstatus.isLeftGripActive && leftController.transform.position.z > cameraXR.transform.position.z && 
-                leftController.transform.position.y > cameraXR.transform.position.y - 0.02)
+            if (xrstatus.isLeftGripActive && leftController.transform.position.z > cameraXR.transform.position.z-0.3 && 
+                leftController.transform.position.y > cameraXR.transform.position.y - 0.03)
             {
                 dimpleAudio.PlayOneShot(blockSFX);
                 ActivateLeftHaptic();

@@ -297,8 +297,8 @@ public class TrainerScripts : MonoBehaviour
         }
         else
         {
-            if (xrstatus.isRightGripActive && rightController.transform.position.z+0.1f > cameraXR.transform.position.z &&
-                rightController.transform.position.y > cameraXR.transform.position.y - 0.02f)
+            if (xrstatus.isRightGripActive && rightController.transform.position.z > cameraXR.transform.position.z-0.3 &&
+                rightController.transform.position.y > cameraXR.transform.position.y - 0.1f)
             {
                 blockCount++;
                 trainerAudio.PlayOneShot(blockSFX);
