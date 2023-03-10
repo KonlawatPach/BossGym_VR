@@ -240,13 +240,13 @@ public class TrainerScripts : MonoBehaviour
             if ((other.CompareTag("LeftHand") && xrstatus.isLeftGripActive) || (other.CompareTag("RightHand") && xrstatus.isRightGripActive))
             {
                 trainerAudio.PlayOneShot(punchSound);
-                if (punchCount < 2) punchCount++;
+                if (punchCount < 1) punchCount++;
                 else letPunch = false;
             }
             else if ((other.CompareTag("LeftHand") && !xrstatus.isLeftGripActive) || (other.CompareTag("RightHand") && !xrstatus.isRightGripActive))
             {
                 trainerAudio.PlayOneShot(slapSound);
-                if (punchCount < 2) punchCount++;
+                if (punchCount < 1) punchCount++;
                 else letPunch = false;
             }
         }
